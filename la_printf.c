@@ -27,7 +27,7 @@ int p_c(char Buff[], int flags, int width, int precision, int size)
  * @flags: flags
  * @width: Width
  * @precision: Precision
- * @size:ize
+ * @size: size
  * list: argument list
  * Return: Number of characters printed
  */
