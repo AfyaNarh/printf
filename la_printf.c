@@ -111,7 +111,7 @@ int print_int(va_list list, char Buff[],
 		num /= 10;
 	} while (a >= 0 && num != 0);
 
-	return (write_number(neg, a + 1, Buff, flags, width, precision, size));
+	return (print_formatted_number(neg, a + 1, Buff, flags, width, precision, size));
 }
 
 /**
