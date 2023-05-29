@@ -27,7 +27,11 @@ int p_c(char Buff[], int flags, int width, int precision, int size)
  * @flags: flags
  * @width: Width
  * @precision: Precision
+<<<<<<< HEAD
  * @size:size
+=======
+ * @size: size
+>>>>>>> eb55e0e6ab56404bd552a70b97973f3a4156a8ea
  * list: argument list
  * Return: Number of characters printed
  */
@@ -111,7 +115,7 @@ int print_int(va_list list, char Buff[],
 		num /= 10;
 	} while (a >= 0 && num != 0);
 
-	return (write_number(neg, a + 1, Buff, flags, width, precision, size));
+	return (print_formatted_number(neg, a + 1, Buff, flags, width, precision, size));
 }
 
 /**
