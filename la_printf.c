@@ -114,3 +114,29 @@ int print_int(va_list list, char Buff[],
 	return (write_number(neg, a + 1, Buff, flags, width, precision, size));
 }
 
+/**
+ * print_custom_percent - Prints a percent sign
+ * @list: List of arguments (unused)
+ * @Buff: Buffer array to handle print (unused)
+ * @flags: Calculates active flags (unused)
+ * @width: Get width (unused)
+ * @precision: Precision specification (unused)
+ * @size:ize specifier (unused)
+ * Return: Number of characters printed
+ */
+int print_custom_percent(va_list list, char Buff[],
+	int flags, int width, int precision, int size)
+{
+	char percent = '%';
+	int chars_printed = 0;
+
+	(void)list;        /*uppress unused parameter warning */
+	(void)Buff;
+	(void)flags;
+	(void)width;
+	(void)precision;
+	(void)size;
+
+	chars_printed = write(1, &percent, 1);
+	return (chars_printed);
+}
