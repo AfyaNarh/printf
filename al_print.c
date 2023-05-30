@@ -7,7 +7,7 @@
  * @flags: Active flags
  * @width: Width specification
  * @precision: Precision specification
- * @size: Size specifier
+ * @size:ize specifier
  * Return: Number of characters printed
  */
 int print_unsigned_binary(va_list list, char Buff[],
@@ -54,7 +54,7 @@ int print_unsigned_binary(va_list list, char Buff[],
  * @flags: Calculates active flags
  * @width: Width specification
  * @precision: Precision specification
- * @size: Size specifier
+ * @size:ize specifier
  * Return: Number of characters printed
  */
 int print_modified_unsigned(va_list list, char Buff[],
@@ -87,7 +87,7 @@ int print_modified_unsigned(va_list list, char Buff[],
  * @flags: Calculates active flags
  * @width: Get width
  * @precision: Precision specification
- * @size: Size specifier
+ * @size:ize specifier
  * Return: Number of characters printed
  */
 int print_custom_octal(va_list list, char Buff[],
