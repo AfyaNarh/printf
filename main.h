@@ -10,18 +10,18 @@
 int _printf(const char *format, ...);
 
 /***Protoypes for Functions used*******/
-int p_c(char Buff[], int flags, int width, int precision, int size);
-int p_s(char Buff[], int flags, int width, int precision,
+int process_Char(char Buff[], int flags, int width, int precision, int size);
+int process_String(char Buff[], int flags, int width, int precision,
 		int size, va_list list);
-int print_int(va_list list, char Buff[],
+int process_Int(va_list list, char Buff[],
 		int flags, int width, int precision, int size);
-int print_custom_percent(va_list list, char Buff[],
+int process_Percent(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
-int print_unsigned_binary(va_list list, char Buff[],
+int process_Binary(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
-int print_modified_unsigned(va_list list, char Buff[],
+int process_Unsigned(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
-int print_custom_octal(va_list list, char Buff[],
+int process_Octal(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
 int write_buffer(char c, char Buff[],
 	void flags, int width, int precision, int size);
