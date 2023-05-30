@@ -60,7 +60,7 @@ int writeMemoryAddress(char Buff[], int buffInd, int num_length,
 
 /**
  * num_writer - Writes a number using a buffer
- * @buffInd:tarting index of the number in the buffer
+ * @buffInd: starting index of the number in the buffer
  * @Buff: Buffer
  * @flags: Flags
  * @width: Width
