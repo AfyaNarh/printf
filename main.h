@@ -7,6 +7,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int _printf(const char *format, ...);
+
+/***Protoypes for Functions used*******/
 int p_c(char Buff[], int flags, int width, int precision, int size);
 int p_s(char Buff[], int flags, int width, int precision,
 		int size, va_list list);
@@ -34,4 +37,12 @@ int num_writer(int buffInd, char Buff[],
 	int flags, int width, int precision,
 	int num_length, char filler, char extra);
 void print_buffer(char Buff[], int *buffInd);
+
+/*****Prototypes for Flags*****/
+int calculate_flags(const char *format, int *index);
+int calculate_width(const char *format, int *index, va_list list);
+int calculatePrecision(const char *format, int *index, va_list list);
+int calculateSize(const char *format, int *index);
+
+
 #endif
