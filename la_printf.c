@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * p_c - Prints a single character
+ * process_Char - Process and prints a single character
  * @Buff: Buffer array
  * @flags: Flags
  * @width: Width
@@ -8,7 +8,7 @@
  * @size:size
  * Return: Number of characters printed
  */
-int p_c(char Buff[], int flags, int width, int precision, int size)
+int process_Char(char Buff[], int flags, int width, int precision, int size)
 {
 	va_list list;
 	char character;
@@ -22,23 +22,19 @@ int p_c(char Buff[], int flags, int width, int precision, int size)
 	return (printed_chars);
 }
 /**
- * p_s - Prints string
+ * process_String - function to process and print string
  * @Buff: Buffer array
  * @flags: flags
  * @width: Width
+ * list: Argument list
  * @precision: Precision
-<<<<<<< HEAD
- * @size:size
-=======
  * @size: size
->>>>>>> eb55e0e6ab56404bd552a70b97973f3a4156a8ea
- * list: argument list
  * Return: Number of characters printed
  */
-int p_s(char Buff[], int flags, int width, int precision,
-		int size, va_list list)
+int process_String(char Buff[], int flags, int width,
+		va_list list, int precision, int size)
 {
-	int len = 0, i;
+	int len = 0, a;
 
 	char *str = va_arg(list, char *);
 
@@ -56,38 +52,38 @@ int p_s(char Buff[], int flags, int width, int precision,
 	{
 		if (flags & F_MINUS)
 		{
-			for (i = 0; i < len; i++)
-				write(1, &str[i], 1);
-			for (i = 0; i < width - len; i++)
+			for (a = 0; a < len; a++)
+				write(1, &str[a], 1);
+			for (i = 0; a < width - len; a++)
 				write(1, " ", 1);
 			return (width);
 		}
 		else
 		{
-			for (i = 0; i < width - len; i++)
+			for (a = 0; a < width - len; a++)
 				write(1, " ", 1);
-			for (i = 0; i < len; i++)
-				write(1, &str[i], 1);
+			for (a = 0; a < len; a++)
+				write(1, &str[a], 1);
 			return (width);
 		}
 	}
-	for (i = 0; i < len; i++)
+	for (a = 0; a < len; a++)
 		write(1, &str[i], 1);
 	return (len);
 }
 
 
 /**
- * print_int - Prints an integer
+ * process_Int - process and prints an integer
  * @list: argument list
- * @Buff: Buffer array to handle print
+ * @Buff: Buffer array
  * @flags: flags
  * @width: Width
  * @precision: Precision
  * @size: size
  * Return: Number of characters printed
  */
-int print_int(va_list list, char Buff[],
+int process_Int(va_list list, char Buff[],
 		int flags, int width, int precision, int size)
 {
 	int a = BUFFER_SIZE - 2;
@@ -115,20 +111,21 @@ int print_int(va_list list, char Buff[],
 		num /= 10;
 	} while (a >= 0 && num != 0);
 
-	return (print_formatted_number(neg, a + 1, Buff, flags, width, precision, size));
+	return (print_formatted_number(neg, a + 1, Buff,
+				flags, width, precision, size));
 }
 
 /**
- * print_custom_percent - Prints a percent sign
+ * process_Percent - Prints a percent sign
  * @list: List of arguments (unused)
- * @Buff: Buffer array to handle print (unused)
- * @flags: Calculates active flags (unused)
+ * @Buff: Buffer array to process and print (unused)
+ * @flags: Calculates flags (unused)
  * @width: Get width (unused)
  * @precision: Precision specification (unused)
  * @size:size specifier (unused)
  * Return: Number of characters printed
  */
-int print_custom_percent(va_list list, char Buff[],
+int process_Percent(va_list list, char Buff[],
 	int flags, int width, int precision, int size)
 {
 	char percent = '%';
