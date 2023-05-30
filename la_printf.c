@@ -5,7 +5,7 @@
  * @flags: Flags
  * @width: Width
  * @precision: Precision
- * @size:ize
+ * @size:size
  * Return: Number of characters printed
  */
 int p_c(char Buff[], int flags, int width, int precision, int size)
@@ -27,7 +27,11 @@ int p_c(char Buff[], int flags, int width, int precision, int size)
  * @flags: flags
  * @width: Width
  * @precision: Precision
+<<<<<<< HEAD
+ * @size:size
+=======
  * @size: size
+>>>>>>> eb55e0e6ab56404bd552a70b97973f3a4156a8ea
  * list: argument list
  * Return: Number of characters printed
  */
@@ -121,7 +125,7 @@ int print_int(va_list list, char Buff[],
  * @flags: Calculates active flags (unused)
  * @width: Get width (unused)
  * @precision: Precision specification (unused)
- * @size:ize specifier (unused)
+ * @size:size specifier (unused)
  * Return: Number of characters printed
  */
 int print_custom_percent(va_list list, char Buff[],
