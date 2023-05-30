@@ -128,3 +128,55 @@ int process_reverse(va_list list, char buffer[],
 	return (total);
 }
 
+
+/**
+ * process_rot13string - Processes and prints a string in rot13.
+ * @list: List of arguments
+ * @Buff: Buffer array to handle print
+ * @flags: Calculates active flags
+ * @width: Get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of characters printed.
+ */
+int process_rot13string(va_list list, char Buff[],
+		int flags, int width, int precision, int size)
+{
+	char x;
+	char *str;
+	unsigned int a, b;
+	int total = 0;
+	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	str = va_arg(list, char *);
+	void UNUSED(Buff);
+	void UNUSED(flags);
+	void UNUSED(width);
+	void UNUSED(precision);
+	void UNUSED(size);
+
+	if (str == NULL)
+		str = "(AHYY)";
+	for (a = 0; str[a]; a++)
+	{
+		for (b = 0; in[b]; b++)
+		{
+			if (in[b] == str[a])
+			{
+				x = out[b];
+				write(1, &x, 1);
+				total++;
+				break;
+			}
+		}
+		if (!in[b])
+		{
+			x = str[a];
+
+			write(1, &x, 1);
+			total++;
+		}
+	}
+	return (total);
+}
