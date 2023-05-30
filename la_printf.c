@@ -26,13 +26,13 @@ int process_Char(char Buff[], int flags, int width, int precision, int size)
  * @Buff: Buffer array
  * @flags: flags
  * @width: Width
- * list: Argument list
+ * @list: Argument list of variable arguments
  * @precision: Precision
  * @size: size
  * Return: Number of characters printed
  */
-int process_String(char Buff[], int flags, int width,
-		va_list list, int precision, int size)
+int process_String(char Buff[], int flags, int width, va_list list,
+		int precision, int size)
 {
 	int len = 0, a;
 
