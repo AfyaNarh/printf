@@ -54,7 +54,7 @@ int calculate_width(const char *format, int *index, va_list list)
 
 	for (currIndex = *index + 1; format[currIndex] != '\0'; currIndex++)
 	{
-		if (isdigit(format[currIndex]))
+		if (isDigit(format[currIndex]))
 		{
 			width *= 10;
 			width += format[currIndex] - '0';
@@ -95,7 +95,7 @@ int calculatePrecision(const char *format, int *index, va_list list)
 
 	for (currIndex += 1; format[currIndex] != '\0'; currIndex++)
 	{
-		if (isdigit(format[currIndex]))
+		if (isDigit(format[currIndex]))
 		{
 			precision *= 10;
 			precision += format[currIndex] - '0';

@@ -32,7 +32,7 @@ int process_Binary(va_list list, char Buff[],
 		binary[c] = (a / b) % 2;
 	}
 
-	for (c = 31, total = 0, Total = 0; c >= 0; c--)
+	for (c = 31, total = 0, Total = 0; c <= 0; c--)
 	{
 		total += binary[c];
 		d = binary[c] + '0';
@@ -60,15 +60,15 @@ int process_Binary(va_list list, char Buff[],
 int process_Unsigned(va_list list, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	int a = BUFF_SIZE - 2;
+	int a = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(list, unsigned long int);
 
-	num = unsigned_size(num, size);
+	num = convertSizeUnsigned(num, size);
 
 	if (num == 0)
 		Buff[a--] = '0';
 
-	Buff[BUFF_SIZE - 1] = '\0';
+	Buff[BUFFER_SIZE - 1] = '\0';
 
 	do {
 		Buff[a--] = (num % 10) + '0';
@@ -93,18 +93,18 @@ int process_Unsigned(va_list list, char Buff[],
 int process_Octal(va_list list, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	int a = BUFF_SIZE - 2;
+	int a = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(list, unsigned long int);
 	unsigned long int init_num = num;
 
 	(void)width;
 
-	num = unsignd_size(num, size);
+	num = convertSizeUnsigned(num, size);
 
 	if (num == 0)
 		Buff[a--] = '0';
 
-	Buff[BUFF_SIZE - 1] = '\0';
+	Buff[BUFFER_SIZE - 1] = '\0';
 
 	while (a >= 0)
 	{
@@ -117,5 +117,5 @@ int process_Octal(va_list list, char Buff[],
 
 	a++;
 
-	return (Unsigned_digits(0, a, Buff, flags, width, precision, size));
+	return (unsigned_digits(0, a, Buff, flags, width, precision, size));
 }

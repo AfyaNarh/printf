@@ -8,7 +8,7 @@
 void print_buffer(char Buff[], int *buffInd)
 {
 	if (*buffInd > 0)
-		write(1, &buff[0], *buffInd);
+		write(1, &Buff[0], *buffInd);
 	*buffInd = 0;
 }
 
@@ -46,8 +46,8 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(Buff, &buffInd);
-			flags = calculateFlags(format, &a);
-			width = calculateWidth(format, &a, list);
+			flags = calculate_flags(format, &a);
+			width = calculate_width(format, &a, list);
 			precision = calculatePrecision(format, &a, list);
 			size = calculateSize(format, &a);
 			++a;

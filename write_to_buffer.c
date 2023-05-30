@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
  * write_buffer - Prints a string
  * @c: char types.
@@ -10,13 +12,13 @@
  * Return: Number of chars printed.
  */
 int write_buffer(char c, char Buff[],
-	void flags, int width, int precision, int size)
-{ /* char is stored at left and padding at Buff's right */
+	int flags, int width, int precision, int size)
+{
 	int a = 0;
 	char filler = ' ';
 
-	void UNUSED(precision);
-	void UNUSED(size);
+	UNUSED(precision);
+	UNUSED(size);
 
 	if (flags & F_ZERO)
 		filler = '0';
@@ -56,12 +58,12 @@ int write_buffer(char c, char Buff[],
 int print_formatted_number(int neg, int buffInd, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	const int BUFFER_SIZE = 100;
-
 	int length = BUFFER_SIZE - buffInd - 1;
 	char filler = (flags & F_ZERO && !(flags & F_MINUS)) ? '0' : ' ';
 	char extra = 0;
 
+	UNUSED(size);
+	
 	if (neg)
 		extra = '-';
 	else if (flags & F_PLUS)
@@ -141,11 +143,11 @@ int handleProcess(const char *format, int *buffInd, va_list list, char Buff[],
 {
 	int a, numProcessed = 0, processedChars = -1;
 	FmtSpec_t fmtSpecifiers[] = {
-		{'c', processChar}, {'s', processString}, {'%', processPercent},
-		{'i', processInt}, {'d', processInt}, {'b', processBinary},
-		{'u', processUnsigned}, {'o', processOctal}, {'x', processHexadecimal},
-		{'X', processHexaUpper}, {'p', processPointer}, {'S', processNonPrintable},
-		{'r', processReverse}, {'R', processRot13String}, {'\0', NULL}
+		{'c', process_Char}, {'s', process_String}, {'%', process_Percent},
+		{'i', process_Int}, {'d', process_Int}, {'b', process_Binary},
+		{'u', process_Unsigned}, {'o', process_Octal}, {'x', process_hexadecimal},
+		{'X', processHexaUpper}, {'p', process_pointer}, {'S', process_non_printable},
+		{'r', process_reverse}, {'R', process_rot13string}, {'\0', NULL}
 	};
 	for (a = 0; fmtSpecifiers[a].sp != '\0'; a++)
 	{

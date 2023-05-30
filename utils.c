@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * isdigit - Checks if a character is a digit
+ * isDigit - Checks if a character is a digit
  * @c: The character to check
  * Return: 1 if c is a digit, 0 otherwise
  */
-int isdigit(char c)
+int isDigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
@@ -46,9 +46,9 @@ int isPrintable(char c)
  */
 long int convertSizeNumber(long int num, int size)
 {
-	if (size == _LONG)
+	if (size == S_LONG)
 		return (num);
-	else if (size == _SHORT)
+	else if (size == S_SHORT)
 		return ((short) num);
 	return ((int) num);
 }
@@ -61,9 +61,9 @@ long int convertSizeNumber(long int num, int size)
  */
 unsigned long int convertSizeUnsigned(unsigned long int num, int size)
 {
-	if (size == _LONG)
+	if (size == S_LONG)
 		return (num);
-	else if (size == _SHORT)
+	else if (size == S_SHORT)
 		return ((unsigned short) num);
 	return ((unsigned int) num);
 }

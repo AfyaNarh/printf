@@ -14,7 +14,7 @@
 int process_hexadecimal(va_list list, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	return (process_hexa(types, "0123456789abcdef", Buff,
+	return (process_hexa(list, "0123456789abcdef", Buff,
 		flags, 'x', width, precision, size));
 }
 
@@ -31,7 +31,7 @@ int process_hexadecimal(va_list list, char Buff[],
 int processHexaUpper(va_list list, char Buff[],
 		int flags, int width, int precision, int size)
 {
-	return (processHexa(list, "0123456789ABCDEF", Buff,
+	return (process_hexa(list, "0123456789ABCDEF", Buff,
 				flags, 'X', width, precision, size));
 }
 
@@ -56,7 +56,7 @@ int process_hexa(va_list list, char map_to[], char Buff[],
 
 	(void)width;  /* Unused parameter */
 
-	num = convert_size_unsgnd(num, size);
+	num = convertSizeUnsigned(num, size);
 
 	if (num == 0)
 		Buff[a--] = '0';
@@ -77,7 +77,7 @@ int process_hexa(va_list list, char map_to[], char Buff[],
 
 	a++;
 
-	return (Unsigned_digits(0, a, Buff, flags, width, precision, size));
+	return (unsigned_digits(0, a, Buff, flags, width, precision, size));
 }
 
 /**

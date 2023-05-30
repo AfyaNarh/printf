@@ -61,10 +61,10 @@ int process_non_printable(va_list list, char Buff[],
 	int a = 0, offset_value = 0;
 	char *str = va_arg(list, char *);
 
-	void UNUSED(flags);
-	void UNUSED(width);
-	void UNUSED(precision);
-	void UNUSED(size);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
 
 	if (str == NULL)
 		return (write(1, "(null)", 6));
@@ -73,7 +73,7 @@ int process_non_printable(va_list list, char Buff[],
 		if (isPrintable(str[a]))
 			Buff[a + offset_value] = str[a];
 		else
-			offset_value += append_hexa_code(str[a], Buff, a + offset_value);
+			offset_value += appendHexCode(str[a], Buff, a + offset_value);
 	}
 	Buff[a + offset_value] = '\0';
 
@@ -84,7 +84,7 @@ int process_non_printable(va_list list, char Buff[],
 /**
  * process_reverse - Process and print a string in reverse order.
  * @list: List of arguments.
- * @buffer: Buffer array for print handling.
+ * @Buff: Buffer array for print handling.
  * @flags: Active flags for formatting.
  * @width: Width specification.
  * @precision: Precision specification.
@@ -92,18 +92,18 @@ int process_non_printable(va_list list, char Buff[],
  *
  * Return: Number of characters printed.
  */
-int process_reverse(va_list list, char buffer[],
+int process_reverse(va_list list, char Buff[],
 		int flags, int width, int precision, int size)
 {
 	char *str;
 	int total = 0;
 	int length = 0, a;
 
-	void(buffer);
-	void(flags);
-	void(width);
-	void(precision);
-	void(size);
+	UNUSED(Buff);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
 
 	str = va_arg(list, char *);
 
@@ -150,11 +150,11 @@ int process_rot13string(va_list list, char Buff[],
 	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	str = va_arg(list, char *);
-	void UNUSED(Buff);
-	void UNUSED(flags);
-	void UNUSED(width);
-	void UNUSED(precision);
-	void UNUSED(size);
+	UNUSED(Buff);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
 
 	if (str == NULL)
 		str = "(AHYY)";

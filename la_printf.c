@@ -11,14 +11,12 @@
 int process_Char(char Buff[], int flags, int width, int precision, int size)
 {
 	va_list list;
-	char character;
+	char c;
 	int printed_chars;
 
-	va_start(list, Buff);
-	character = (char)va_arg(list, int);
-	va_end(list);
+	c = (char)va_arg(list, int);
 
-	printed_chars = write_buffer(character, Buff, flags, width, precision, size);
+	printed_chars = write_buffer(c, Buff, flags, width, precision, size);
 	return (printed_chars);
 }
 /**
@@ -31,12 +29,17 @@ int process_Char(char Buff[], int flags, int width, int precision, int size)
  * @size: size
  * Return: Number of characters printed
  */
-int process_String(char Buff[], int flags, int width, va_list list,
-		int precision, int size)
+int process_String(char Buff[], int flags, int width,
+		int precision, int size, va_list list)
 {
 	int len = 0, a;
-
 	char *str = va_arg(list, char *);
+
+	UNUSED(Buff);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
 
 	if (str == NULL)
 	{
@@ -54,7 +57,7 @@ int process_String(char Buff[], int flags, int width, va_list list,
 		{
 			for (a = 0; a < len; a++)
 				write(1, &str[a], 1);
-			for (i = 0; a < width - len; a++)
+			for (a = 0; a < width - len; a++)
 				write(1, " ", 1);
 			return (width);
 		}
@@ -68,7 +71,7 @@ int process_String(char Buff[], int flags, int width, va_list list,
 		}
 	}
 	for (a = 0; a < len; a++)
-		write(1, &str[i], 1);
+		write(1, &str[a], 1);
 	return (len);
 }
 
@@ -91,7 +94,7 @@ int process_Int(va_list list, char Buff[],
 	long int c = va_arg(list, long int);
 	unsigned long int num;
 
-	c = convert(c, size);
+	c = convertSizeNumber(c, size);
 
 	if (c == 0)
 

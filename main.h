@@ -1,8 +1,9 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#define BUFFER_SIZE 1024
 #define UNUSED(x) (void)(x)
+#define BUFFER_SIZE (1024)
+
 #define F_MINUS 1
 #define F_PLUS 2
 #define F_ZERO 4
@@ -54,7 +55,7 @@ int process_Unsigned(va_list list, char Buff[],
 int process_Octal(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
 int write_buffer(char c, char Buff[],
-	void flags, int width, int precision, int size);
+	int flags, int width, int precision, int size);
 int print_formatted_number(int neg, int buffInd, char Buff[],
 	int flags, int width, int precision, int size);
 int unsigned_digits(int neg, int buffInd, char Buff[],
@@ -89,5 +90,10 @@ int calculate_width(const char *format, int *index, va_list list);
 int calculatePrecision(const char *format, int *index, va_list list);
 int calculateSize(const char *format, int *index);
 
+int isDigit(char c);
+int appendHexCode(char asciiCode, char Buff[], int ind);
+int isPrintable(char c);
+long int convertSizeNumber(long int num, int size);
+unsigned long int convertSizeUnsigned(unsigned long int num, int size);
 
 #endif
