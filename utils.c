@@ -20,6 +20,7 @@ int isdigit(char c)
 int appendHexCode(char asciiCode, char Buff[], int ind)
 {
 	char hexMap[] = "0123456789ABCDEF";
+
 	Buff[ind++] = '\\';
 	Buff[ind++] = 'x';
 	Buff[ind++] = hexMap[asciiCode / 16];
@@ -45,9 +46,9 @@ int isPrintable(char c)
  */
 long int convertSizeNumber(long int num, int size)
 {
-	if (size ==_LONG)
+	if (size == _LONG)
 		return (num);
-	else if (size ==_SHORT)
+	else if (size == _SHORT)
 		return ((short) num);
 	return ((int) num);
 }
@@ -60,10 +61,9 @@ long int convertSizeNumber(long int num, int size)
  */
 unsigned long int convertSizeUnsigned(unsigned long int num, int size)
 {
-	if (size ==_LONG)
+	if (size == _LONG)
 		return (num);
-	else if (size ==_SHORT)
+	else if (size == _SHORT)
 		return ((unsigned short) num);
 	return ((unsigned int) num);
 }
-
