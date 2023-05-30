@@ -2,6 +2,10 @@
 #define MAIN_H_
 
 #define BUFFER_SIZE 1024
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 int p_c(char Buff[], int flags, int width, int precision, int size);
 int p_s(char Buff[], int flags, int width, int precision,
@@ -16,5 +20,18 @@ int print_modified_unsigned(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
 int print_custom_octal(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
-
+int write_buffer(char c, char Buff[],
+	void flags, int width, int precision, int size);
+int print_formatted_number(int neg, int buffInd, char Buff[],
+	int flags, int width, int precision, int size);
+int unsigned_digits(int neg, int buffInd, char Buff[],
+	int flags, int width, int precision, int size);
+int handleProcess(const char *format, int *buffInd, va_list list, char Buff[],
+	int flags, int width, int precision, int size);
+int writeMemoryAddress(char Buff[], int buffInd, int num_length,
+	int width, int flags, char filler, char extra, int filler_start);
+int num_writer(int buffInd, char Buff[],
+	int flags, int width, int precision,
+	int num_length, char filler, char extra);
+void print_buffer(char Buff[], int *buffInd);
 #endif
