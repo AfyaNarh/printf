@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
  * writeMemoryAddress - Write a memory address
  * @Buff: Array of chars
@@ -111,9 +113,7 @@ int num_writer(int buffInd, char Buff[],
 				write(1, &Buff[buffInd], num_length - (1 - filler_start)));
 		}
 	}
-
 	if (extra)
 		Buff[--buffInd] = extra;
-
 	return (write(1, &Buff[buffInd], num_length));
 }
