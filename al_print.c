@@ -13,7 +13,7 @@
 int process_Binary(va_list list, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	unsigned int a, b, c, d, total;
+	unsigned int a, b, c, total;
 	unsigned int binary[32];
 	int Total;
 
@@ -32,13 +32,14 @@ int process_Binary(va_list list, char Buff[],
 		binary[c] = (a / b) % 2;
 	}
 
-	for (c = 31, total = 0, Total = 0; c <= 0; c--)
+	for (c = 0, total = 0, Total = 0; c < 32; c++)
 	{
 		total += binary[c];
-		d = binary[c] + '0';
 
-		if (total || c == 0)
+		if (total || c == 31)
 		{
+			char d = '0' + binary[c];
+
 			write(1, &d, 1);
 			Total++;
 		}
@@ -70,10 +71,11 @@ int process_Unsigned(va_list list, char Buff[],
 
 	Buff[BUFFER_SIZE - 1] = '\0';
 
-	do {
+	while (num > 0)
+	{
 		Buff[a--] = (num % 10) + '0';
 		num /= 10;
-	} while (num > 0);
+	}
 
 	a++;
 
