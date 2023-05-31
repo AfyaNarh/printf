@@ -60,59 +60,59 @@ int writeMemoryAddress(char Buff[], int buffInd, int num_length,
 
 /**
  * num_writer - Writes a number using a buffer
- * @buffInd: starting index of the number in the buffer
+ * @ind: starting index of the number in the buffer
  * @Buff: Buffer
  * @flags: Flags
  * @width: Width
- * @precision: Precision
- * @num_length: Length of the number
+ * @preSpec: Precision
+ * @len: Length of the number
  * @filler: Padding character
  * @extra: Extra character
  *
  * Return: Number of printed characters.
  */
-int num_writer(int buffInd, char Buff[],
-	int flags, int width, int precision,
-	int num_length, char filler, char extra)
+int num_writer(int ind, char Buff[], int flags, int width,
+		int preSpec, int len, char filler, char extra)
 {
-	if (precision == 0 && buffInd == BUFFER_SIZE - 2 &&
-			Buff[buffInd] == '0' && width == 0)
-		return (0);
-	if (precision == 0 && buffInd == BUFFER_SIZE - 2 && Buff[buffInd] == '0')
-		Buff[buffInd] = filler = ' ';
-	if (precision > 0 && precision < num_length)
-		filler = ' ';
-	while (num_length < precision)
-		Buff[--buffInd] = '0', num_length++;
-	if (extra != 0)
-		num_length++;
-	if (width > num_length)
-	{
-		int a, filler_start = 1;
+	int a, filler_start = 1;
 
-		for (a = 1; a < width - num_length + 1; a++)
+	if (preSpec == 0 && ind == BUFFER_SIZE - 2 && Buff[ind] == '0' && width == 0)
+		return (0);
+	if (preSpec == 0 && ind == BUFFER_SIZE - 2 && Buff[ind] == '0')
+		Buff[ind] = filler = ' ';
+	if (preSpec > 0 && preSpec < len)
+		filler = ' ';
+	while (preSpec > len)
+		Buff[--ind] = '0', len++;
+	if (extra != 0)
+		len++;
+	if (width > len)
+	{
+		for (a = 1; a < width - len + 1; a++)
 			Buff[a] = filler;
 		Buff[a] = '\0';
 		if (flags & F_MINUS && filler == ' ')
 		{
 			if (extra)
-				Buff[--buffInd] = extra;
-			return (write(1, &Buff[buffInd], num_length) + write(1, &Buff[1], a - 1));
+				Buff[--ind] = extra;
+			return (write(1, &Buff[ind], len) + write(1, &Buff[1], a - 1));
 		}
 		else if (!(flags & F_MINUS) && filler == ' ')
 		{
 			if (extra)
-				Buff[--buffInd] = extra;
-			return (write(1, &Buff[1], a - 1) + write(1, &Buff[buffInd], num_length));
+				Buff[--ind] = extra;
+			return (write(1, &Buff[1], a - 1) + write(1, &Buff[ind], len));
 		}
 		else if (!(flags & F_MINUS) && filler == '0')
 		{
 			if (extra)
 				Buff[--filler_start] = extra;
 			return (write(1, &Buff[filler_start], a - filler_start) +
-				write(1, &Buff[buffInd], num_length - (1 - filler_start)));
+				write(1, &Buff[ind], len - (1 - filler_start)));
 		}
 	}
-	Buff[--buffInd] = extra;
-	return (write(1, &Buff[buffInd], num_length));
+	if (extra)
+		Buff[--ind] = extra;
+	return (write(1, &Buff[ind], len));
 }
+
