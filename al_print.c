@@ -63,7 +63,7 @@ int process_Unsigned(va_list list, char Buff[],
 	int a = BUFFER_SIZE - 2;
 	unsigned long int num = va_arg(list, unsigned long int);
 
-	num = convertSizeUnsigned(num, size);
+	num = convertSizeUnsigned_int(num, size);
 
 	if (num == 0)
 		Buff[a--] = '0';
@@ -99,7 +99,7 @@ int process_Octal(va_list list, char Buff[],
 
 	(void)width;
 
-	num = convertSizeUnsigned(num, size);
+	num = convertSizeUnsigned_int(num, size);
 
 	if (num == 0)
 		Buff[a--] = '0';

@@ -41,13 +41,14 @@ struct FS
 typedef struct FS FmtSpec_t;
 
 /***Protoypes for Functions used*******/
-int process_Char(char Buff[], int flags, int width, int precision, int size);
-int process_String(char Buff[], int flags, int width, int precision,
-		int size, va_list list);
+int process_Char(va_list list, char Buff[], int flags,
+		int width, int precision, int size);
+int process_String(va_list list, char Buff[], int flags,
+		int width, int precision, int size);
 int process_Int(va_list list, char Buff[],
 		int flags, int width, int precision, int size);
-int process_Percent(va_list list, char Buff[],
-	int flags, int width, int precision, int size);
+int process_Percent(va_list list, char Buff[], int flags,
+		int width, int precision, int size);
 int process_Binary(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
 int process_Unsigned(va_list list, char Buff[],
@@ -94,6 +95,6 @@ int isDigit(char c);
 int appendHexCode(char asciiCode, char Buff[], int ind);
 int isPrintable(char c);
 long int convertSizeNumber(long int num, int size);
-unsigned long int convertSizeUnsigned(unsigned long int num, int size);
+unsigned long int convertSizeUnsigned_int(unsigned long int num, int size);
 
 #endif

@@ -6,21 +6,18 @@
  * @width: Width
  * @precision: Precision
  * @size:size
+ * @list: Argument list
  * Return: Number of characters printed
  */
-int process_Char(char Buff[], int flags, int width, int precision, int size)
+int process_Char(va_list list, char Buff[], int flags,
+		int width, int precision, int size)
 {
-	va_list list;
-	char c;
-	int printed_chars;
+	char c = (char)va_arg(list, int);
 
-	c = (char)va_arg(list, int);
-
-	printed_chars = write_buffer(c, Buff, flags, width, precision, size);
-	return (printed_chars);
+	return (write_buffer(c, Buff, flags, width, precision, size));
 }
 /**
- * process_String - function to process and print string
+ * process_string - function to process and print string
  * @Buff: Buffer array
  * @flags: flags
  * @width: Width
@@ -29,8 +26,8 @@ int process_Char(char Buff[], int flags, int width, int precision, int size)
  * @size: size
  * Return: Number of characters printed
  */
-int process_String(char Buff[], int flags, int width,
-		int precision, int size, va_list list)
+int process_String(va_list list, char Buff[], int flags,
+		int width, int precision, int size)
 {
 	int len = 0, a;
 	char *str = va_arg(list, char *);
@@ -55,24 +52,21 @@ int process_String(char Buff[], int flags, int width,
 	{
 		if (flags & F_MINUS)
 		{
-			for (a = 0; a < len; a++)
-				write(1, &str[a], 1);
-			for (a = 0; a < width - len; a++)
+			write(1, &str[0], len);
+			for (a = width - len; a > 0; a--)
 				write(1, " ", 1);
 			return (width);
 		}
 		else
 		{
-			for (a = 0; a < width - len; a++)
+			for (a = width - len; a > 0; a--)
 				write(1, " ", 1);
-			for (a = 0; a < len; a++)
-				write(1, &str[a], 1);
+			write(1, &str[0], len);
 			return (width);
 		}
 	}
-	for (a = 0; a < len; a++)
-		write(1, &str[a], 1);
-	return (len);
+	return (write(1, str, len));
+
 }
 
 
@@ -128,13 +122,13 @@ int process_Int(va_list list, char Buff[],
  * @size:size specifier (unused)
  * Return: Number of characters printed
  */
-int process_Percent(va_list list, char Buff[],
-	int flags, int width, int precision, int size)
+int process_Percent(va_list list, char Buff[], int flags,
+		int width, int precision, int size)
 {
 	char percent = '%';
 	int chars_printed = 0;
 
-	(void)list;        /*uppress unused parameter warning */
+	(void)list;
 	(void)Buff;
 	(void)flags;
 	(void)width;

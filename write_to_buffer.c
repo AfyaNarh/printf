@@ -63,7 +63,7 @@ int print_formatted_number(int neg, int buffInd, char Buff[],
 	char extra = 0;
 
 	UNUSED(size);
-	
+
 	if (neg)
 		extra = '-';
 	else if (flags & F_PLUS)
@@ -146,8 +146,9 @@ int handleProcess(const char *format, int *buffInd, va_list list, char Buff[],
 		{'c', process_Char}, {'s', process_String}, {'%', process_Percent},
 		{'i', process_Int}, {'d', process_Int}, {'b', process_Binary},
 		{'u', process_Unsigned}, {'o', process_Octal}, {'x', process_hexadecimal},
-		{'X', processHexaUpper}, {'p', process_pointer}, {'S', process_non_printable},
-		{'r', process_reverse}, {'R', process_rot13string}, {'\0', NULL}
+		{'X', processHexaUpper}, {'p', process_pointer},
+		{'S', process_non_printable}, {'r', process_reverse},
+		{'R', process_rot13string}, {'\0', NULL}
 	};
 	for (a = 0; fmtSpecifiers[a].sp != '\0'; a++)
 	{

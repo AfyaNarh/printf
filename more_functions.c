@@ -56,7 +56,7 @@ int process_hexa(va_list list, char map_to[], char Buff[],
 
 	(void)width;  /* Unused parameter */
 
-	num = convertSizeUnsigned(num, size);
+	num = convertSizeUnsigned_int(num, size);
 
 	if (num == 0)
 		Buff[a--] = '0';
@@ -78,54 +78,5 @@ int process_hexa(va_list list, char map_to[], char Buff[],
 	a++;
 
 	return (unsigned_digits(0, a, Buff, flags, width, precision, size));
-}
-
-/**
- * process_pointer - Processes and prints the value of a pointer variable
- * @list: List of arguments
- * @Buff: Buffer array to handle print
- * @flags: Calculates active flags
- * @width: Get width
- * @precision: Precision specification
- * @size:ize specifier
- * Return: Number of chars printed.
- */
-int process_pointer(va_list list, char Buff[],
-		int flags, int width, int precision, int size)
-{
-	char extra = 0, filler = ' ';
-	int a = BUFFER_SIZE - 2, length = 2, filler_start = 1;
-	unsigned long num_addrs;
-	char map_to[] = "0123456789abcdef";
-	void *addrs = va_arg(list, void *);
-
-	(void)width;
-	UNUSED(size);
-
-	if (addrs == NULL)
-		return (write(1, "(nil)", 5));
-
-	Buff[BUFFER_SIZE - 1] = '\0';
-	UNUSED(precision);
-
-	num_addrs = (unsigned long)addrs;
-
-	do {
-		Buff[a--] = map_to[num_addrs % 16];
-		num_addrs /= 16;
-		length++;
-	} while (num_addrs > 0);
-
-	if ((flags & F_ZERO) && !(flags & F_MINUS))
-		filler = '0';
-	if (flags & F_PLUS)
-		extra = '+', length++;
-	else if (flags & F_SPACE)
-		extra = ' ', length++;
-
-	a++;
-
-	return (writeMemoryAddress(Buff, a, length,
-				width, flags, filler, extra, filler_start));
 }
 
