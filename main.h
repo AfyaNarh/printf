@@ -57,15 +57,15 @@ int process_Octal(va_list list, char Buff[],
 	int flags, int width, int precision, int size);
 int write_buffer(char c, char Buff[],
 	int flags, int width, int precision, int size);
-int print_formatted_number(int neg, int buffInd, char Buff[],
+int print_formatted_number(int neg, int Index, char Buff[],
 	int flags, int width, int precision, int size);
-int unsigned_digits(int neg, int buffInd, char Buff[],
+int unsigned_digits(int neg, int Index, char Buff[],
 	int flags, int width, int precision, int size);
-int handleProcess(const char *format, int *buffInd, va_list list, char Buff[],
+int handleProcess(const char *format, int *Index, va_list list, char Buff[],
 	int flags, int width, int precision, int size);
-int writeMemoryAddress(char Buff[], int buffInd, int num_length,
+int writeMemoryAddress(char Buff[], int Index, int num_length,
 	int width, int flags, char filler, char extra, int filler_start);
-int num_writer(int buffInd, char Buff[],
+int num_writer(int ind, char Buff[],
 	int flags, int width, int precision,
 	int num_length, char filler, char extra);
 void print_buffer(char Buff[], int *buffInd);

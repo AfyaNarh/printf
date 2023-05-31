@@ -46,7 +46,7 @@ int write_buffer(char c, char Buff[],
 /**
  * print_formatted_number - Prints a formatted number
  * @neg: Flag indicating if the number is negative
- * @buffInd: Buffer index
+ * @Index: index
  * @Buff: Buffer array to handle printing
  * @flags: Active flags for formatting
  * @width: Width specifier
@@ -55,10 +55,10 @@ int write_buffer(char c, char Buff[],
  *
  * Return: Number of characters printed
  */
-int print_formatted_number(int neg, int buffInd, char Buff[],
+int print_formatted_number(int neg, int Index, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	int length = BUFFER_SIZE - buffInd - 1;
+	int length = BUFFER_SIZE - Index - 1;
 	char filler = (flags & F_ZERO && !(flags & F_MINUS)) ? '0' : ' ';
 	char extra = 0;
 
@@ -71,14 +71,14 @@ int print_formatted_number(int neg, int buffInd, char Buff[],
 	else if (flags & F_SPACE)
 		extra = ' ';
 
-	return (num_writer(buffInd, Buff, flags, width, precision,
+	return (num_writer(Index, Buff, flags, width, precision,
 				length, filler, extra));
 }
 
 /**
  * unsigned_digits - Writes an unsigned number
  * @neg: Flag indicating if the number is negative
- * @buffInd: Index at which the number starts in the buffer
+ * @Index: Index at which the number starts
  * @Buff: Array of chars
  * @flags: Flags specifiers
  * @width: Width specifier
@@ -87,25 +87,24 @@ int print_formatted_number(int neg, int buffInd, char Buff[],
  *
  * Return: Number of written chars.
  */
-int unsigned_digits(int neg, int buffInd, char Buff[],
+int unsigned_digits(int neg, int Index, char Buff[],
 	int flags, int width, int precision, int size)
 {
-	const int BUFF_SIZE = 100;
-	int length = BUFF_SIZE - buffInd - 1;
+	int length = BUFFER_SIZE - Index - 1;
 	int a = 0;
 	char filler = ' ';
 
 	UNUSED(neg);
 	UNUSED(size);
 
-	if (precision == 0 && buffInd == BUFF_SIZE - 2 && Buff[buffInd] == '0')
+	if (precision == 0 && Index == BUFFER_SIZE - 2 && Buff[Index] == '0')
 		return (0);
 
 	if (precision > 0 && precision < length)
 		filler = ' ';
 
 	while (precision > length)
-		Buff[--buffInd] = '0', length++;
+		Buff[--Index] = '0', length++;
 
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		filler = '0';
@@ -118,19 +117,19 @@ int unsigned_digits(int neg, int buffInd, char Buff[],
 		Buff[a] = '\0';
 
 		if (flags & F_MINUS)
-			return (write(1, &Buff[buffInd], length) + write(1, &Buff[0], a));
+			return (write(1, &Buff[Index], length) + write(1, &Buff[0], a));
 		else
-			return (write(1, &Buff[0], a) + write(1, &Buff[buffInd], length));
+			return (write(1, &Buff[0], a) + write(1, &Buff[Index], length));
 	}
 
-	return (write(1, &Buff[buffInd], length));
+	return (write(1, &Buff[Index], length));
 }
 
 /**
  * handleProcess - Process an argument based on its type
  * @format: Formatted string in which to process the arguments.
  * @list: List of arguments to be processed.
- * @buffInd: Index in the buffer array.
+ * @Index: Index in the buffer array.
  * @Buff: Buffer array to handle process.
  * @flags: Active flags.
  * @width: Width specifier.
@@ -138,7 +137,7 @@ int unsigned_digits(int neg, int buffInd, char Buff[],
  * @size:ize specifier.
  * Return: Number of characters processed.
  */
-int handleProcess(const char *format, int *buffInd, va_list list, char Buff[],
+int handleProcess(const char *format, int *Index, va_list list, char Buff[],
 	int flags, int width, int precision, int size)
 {
 	int a, numProcessed = 0, processedChars = -1;
@@ -152,27 +151,27 @@ int handleProcess(const char *format, int *buffInd, va_list list, char Buff[],
 	};
 	for (a = 0; fmtSpecifiers[a].sp != '\0'; a++)
 	{
-		if (format[*buffInd] == fmtSpecifiers[a].sp)
+		if (format[*Index] == fmtSpecifiers[a].sp)
 			return (fmtSpecifiers[a].fn(list, Buff, flags, width, precision, size));
 	}
 
 	if (fmtSpecifiers[a].sp == '\0')
 	{
-		if (format[*buffInd] == '\0')
+		if (format[*Index] == '\0')
 			return (-1);
 		numProcessed += write(1, "%%", 1);
-		if (format[*buffInd - 1] == ' ')
+		if (format[*Index - 1] == ' ')
 			numProcessed += write(1, " ", 1);
 		else if (width)
 		{
-			--(*buffInd);
-			while (format[*buffInd] != ' ' && format[*buffInd] != '%')
-				--(*buffInd);
-			if (format[*buffInd] == ' ')
-				--(*buffInd);
+			--(*Index);
+			while (format[*Index] != ' ' && format[*Index] != '%')
+				--(*Index);
+			if (format[*Index] == ' ')
+				--(*Index);
 			return (1);
 		}
-		numProcessed += write(1, &format[*buffInd], 1);
+		numProcessed += write(1, &format[*Index], 1);
 		return (numProcessed);
 	}
 	return (processedChars);

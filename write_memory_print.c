@@ -3,7 +3,7 @@
 /**
  * writeMemoryAddress - Write a memory address
  * @Buff: Array of chars
- * @buffInd: Index at which the number starts in the buffer
+ * @Index: Index at which the number starts
  * @num_length: Length of the number
  * @width: Width specifier
  * @flags: Flags specifier
@@ -13,7 +13,7 @@
  *
  * Return: Number of written chars.
  */
-int writeMemoryAddress(char Buff[], int buffInd, int num_length,
+int writeMemoryAddress(char Buff[], int Index, int num_length,
 	int width, int flags, char filler, char extra, int filler_start)
 {
 	int a;
@@ -26,19 +26,19 @@ int writeMemoryAddress(char Buff[], int buffInd, int num_length,
 
 		if (flags & F_MINUS && filler == ' ')
 		{
-			Buff[--buffInd] = 'x';
-			Buff[--buffInd] = '0';
+			Buff[--Index] = 'x';
+			Buff[--Index] = '0';
 			if (extra)
-				Buff[--buffInd] = extra;
-			return (write(1, &Buff[buffInd], num_length) + write(1, &Buff[3], a - 3));
+				Buff[--Index] = extra;
+			return (write(1, &Buff[Index], num_length) + write(1, &Buff[3], a - 3));
 		}
 		else if (!(flags & F_MINUS) && filler == ' ')
 		{
-			Buff[--buffInd] = 'x';
-			Buff[--buffInd] = '0';
+			Buff[--Index] = 'x';
+			Buff[--Index] = '0';
 			if (extra)
-				Buff[--buffInd] = extra;
-			return (write(1, &Buff[3], a - 3) + write(1, &Buff[buffInd], num_length));
+				Buff[--Index] = extra;
+			return (write(1, &Buff[3], a - 3) + write(1, &Buff[Index], num_length));
 		}
 		else if (!(flags & F_MINUS) && filler == '0')
 		{
@@ -47,15 +47,15 @@ int writeMemoryAddress(char Buff[], int buffInd, int num_length,
 			Buff[1] = '0';
 			Buff[2] = 'x';
 			return (write(1, &Buff[filler_start], a - filler_start) +
-				write(1, &Buff[buffInd], num_length - (1 - filler_start) - 2));
+				write(1, &Buff[Index], num_length - (1 - filler_start) - 2));
 		}
 	}
 
-	Buff[--buffInd] = 'x';
-	Buff[--buffInd] = '0';
+	Buff[--Index] = 'x';
+	Buff[--Index] = '0';
 	if (extra)
-		Buff[--buffInd] = extra;
-	return (write(1, &Buff[buffInd], BUFFER_SIZE - buffInd - 1));
+		Buff[--Index] = extra;
+	return (write(1, &Buff[Index], BUFFER_SIZE - Index - 1));
 }
 
 /**

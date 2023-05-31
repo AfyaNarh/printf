@@ -106,7 +106,7 @@ int process_Octal(va_list list, char Buff[],
 
 	Buff[BUFFER_SIZE - 1] = '\0';
 
-	while (a >= 0)
+	while (num > 0)
 	{
 		Buff[a--] = (num % 8) + '0';
 		num /= 8;
